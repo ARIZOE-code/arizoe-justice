@@ -1,0 +1,338 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ARIZOE JUSTICE - Citizen Dashboard">
+    <title>Dashboard | ARIZOE JUSTICE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+        }
+        .nav-active {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white">
+    <!-- TOP BAR -->
+    <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-x-3">
+                <div class="w-9 h-9 bg-blue-600 rounded-2xl flex items-center justify-center text-3xl">⚖️</div>
+                <div class="font-bold text-2xl tracking-tighter">ARIZOE <span class="text-blue-400">JUSTICE</span></div>
+            </div>
+
+            <!-- Role Selector -->
+            <div class="hidden md:flex items-center gap-x-2 bg-zinc-800 rounded-3xl p-1 text-sm">
+                <button onclick="switchRole(0)" id="role-0" 
+                        class="nav-active px-6 py-2.5 rounded-3xl">Citizen</button>
+                <button onclick="switchRole(1)" id="role-1" 
+                        class="px-6 py-2.5 rounded-3xl text-zinc-400 hover:text-white">Member</button>
+                <button onclick="switchRole(2)" id="role-2" 
+                        class="px-6 py-2.5 rounded-3xl text-zinc-400 hover:text-white">Council</button>
+                <button onclick="switchRole(3)" id="role-3" 
+                        class="px-6 py-2.5 rounded-3xl text-zinc-400 hover:text-white">Founder</button>
+            </div>
+
+            <div class="flex items-center gap-x-6">
+                <!-- Search -->
+                <div class="relative hidden md:block">
+                    <input type="text" id="dash-search" 
+                           class="bg-zinc-800 border border-white/10 focus:border-blue-500 w-72 pl-12 py-3 rounded-3xl text-sm outline-none"
+                           placeholder="Search complaints, laws...">
+                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-3.5 text-zinc-400"></i>
+                </div>
+
+                <!-- Notifications -->
+                <button onclick="showNotifications()" 
+                        class="w-11 h-11 flex items-center justify-center hover:bg-zinc-800 rounded-2xl relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="absolute top-2 right-2 w-4 h-4 bg-red-500 rounded-full text-[10px] flex items-center justify-center">3</span>
+                </button>
+
+                <!-- Profile -->
+                <div class="flex items-center gap-x-3 cursor-pointer" onclick="showProfileMenu()">
+                    <div class="text-right">
+                        <div class="text-sm font-semibold">Rahul Sharma</div>
+                        <div class="text-xs text-emerald-400">Verified Citizen</div>
+                    </div>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-xl font-bold">RS</div>
+                </div>
+
+                <!-- Logout -->
+                <button onclick="logout()" 
+                        class="px-6 py-3 text-sm font-medium border border-red-500/30 hover:bg-red-500/10 rounded-3xl text-red-400">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-screen-2xl mx-auto flex">
+        <!-- SIDEBAR -->
+        <aside class="hidden lg:flex w-72 flex-col border-r border-zinc-800 min-h-[calc(100vh-73px)] bg-zinc-900 p-6">
+            <div class="space-y-2">
+                <a href="#" onclick="navigateToSection('overview')" 
+                   class="flex items-center gap-x-4 px-6 py-4 hover:bg-zinc-800 rounded-3xl nav-active">
+                    <i class="fa-solid fa-house w-5"></i>
+                    <span class="font-medium">Overview</span>
+                </a>
+                <a href="#" onclick="navigateToSection('complaints')" 
+                   class="flex items-center gap-x-4 px-6 py-4 hover:bg-zinc-800 rounded-3xl">
+                    <i class="fa-solid fa-file-circle-exclamation w-5"></i>
+                    <span class="font-medium">My Complaints</span>
+                </a>
+                <a href="#" onclick="navigateToSection('campaigns')" 
+                   class="flex items-center gap-x-4 px-6 py-4 hover:bg-zinc-800 rounded-3xl">
+                    <i class="fa-solid fa-users-rectangle w-5"></i>
+                    <span class="font-medium">Campaigns</span>
+                </a>
+                <a href="#" onclick="navigateToSection('library')" 
+                   class="flex items-center gap-x-4 px-6 py-4 hover:bg-zinc-800 rounded-3xl">
+                    <i class="fa-solid fa-book w-5"></i>
+                    <span class="font-medium">Law Library</span>
+                </a>
+                <a href="#" onclick="navigateToSection('ai')" 
+                   class="flex items-center gap-x-4 px-6 py-4 hover:bg-zinc-800 rounded-3xl">
+                    <i class="fa-solid fa-robot w-5"></i>
+                    <span class="font-medium">AI Assistant</span>
+                </a>
+            </div>
+
+            <div class="mt-auto pt-12">
+                <div class="glass p-6 rounded-3xl text-center">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <div class="font-semibold">Justice Champion</div>
+                    <div class="text-xs text-zinc-400 mt-1">Level 7 • 1240 Points</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 p-6 lg:p-10">
+            <!-- Welcome -->
+            <div class="mb-12">
+                <h1 class="text-5xl font-semibold tracking-tighter">Welcome back, Rahul</h1>
+                <p class="text-zinc-400 mt-2">Here's what's happening in your justice journey today.</p>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                <div class="glass p-6 rounded-3xl dashboard-card">
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="text-emerald-400 text-sm font-medium">COMPLAINTS</div>
+                            <div class="text-5xl font-mono font-bold mt-2">14</div>
+                        </div>
+                        <div class="text-5xl opacity-30">📋</div>
+                    </div>
+                    <div class="text-xs text-emerald-400 mt-6">3 resolved this week</div>
+                </div>
+                
+                <div class="glass p-6 rounded-3xl dashboard-card">
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="text-amber-400 text-sm font-medium">CAMPAIGNS</div>
+                            <div class="text-5xl font-mono font-bold mt-2">7</div>
+                        </div>
+                        <div class="text-5xl opacity-30">📣</div>
+                    </div>
+                    <div class="text-xs text-amber-400 mt-6">2 actively supported</div>
+                </div>
+                
+                <div class="glass p-6 rounded-3xl dashboard-card">
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="text-blue-400 text-sm font-medium">AI CHECKS</div>
+                            <div class="text-5xl font-mono font-bold mt-2">29</div>
+                        </div>
+                        <div class="text-5xl opacity-30">🔎</div>
+                    </div>
+                    <div class="text-xs text-blue-400 mt-6">Verified claims</div>
+                </div>
+                
+                <div class="glass p-6 rounded-3xl dashboard-card">
+                    <div class="flex justify-between">
+                        <div>
+                            <div class="text-purple-400 text-sm font-medium">RANK</div>
+                            <div class="text-5xl font-mono font-bold mt-2">#142</div>
+                        </div>
+                        <div class="text-5xl opacity-30">🏅</div>
+                    </div>
+                    <div class="text-xs text-purple-400 mt-6">Nationwide</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <!-- My Complaints -->
+                <div onclick="viewComplaints()" class="glass p-8 rounded-3xl dashboard-card cursor-pointer">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="inline-block px-4 py-1 bg-red-900 text-red-300 text-xs rounded-3xl">ACTIVE</span>
+                            <h3 class="text-2xl font-semibold mt-6">My Complaints</h3>
+                            <p class="text-zinc-400 mt-2">Track and manage your filed grievances</p>
+                        </div>
+                        <div class="text-6xl">📌</div>
+                    </div>
+                    <div class="mt-12 text-sm text-blue-400 font-medium flex items-center gap-x-2">
+                        VIEW ALL 14 COMPLAINTS →
+                    </div>
+                </div>
+
+                <!-- Active Campaigns -->
+                <div onclick="viewCampaigns()" class="glass p-8 rounded-3xl dashboard-card cursor-pointer">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="inline-block px-4 py-1 bg-teal-900 text-teal-300 text-xs rounded-3xl">JOINED</span>
+                            <h3 class="text-2xl font-semibold mt-6">Active Campaigns</h3>
+                            <p class="text-zinc-400 mt-2">Support causes that matter</p>
+                        </div>
+                        <div class="text-6xl">🚩</div>
+                    </div>
+                    <div class="mt-12 text-sm text-teal-400 font-medium flex items-center gap-x-2">
+                        7 CAMPAIGNS • 2 NEW UPDATES
+                    </div>
+                </div>
+
+                <!-- AI Legal Assistant -->
+                <div onclick="openAIAssistant()" class="glass p-8 rounded-3xl dashboard-card cursor-pointer col-span-1 md:col-span-2 xl:col-span-1">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="inline-block px-4 py-1 bg-violet-900 text-violet-300 text-xs rounded-3xl">AI POWERED</span>
+                            <h3 class="text-2xl font-semibold mt-6">AI Legal Assistant</h3>
+                            <p class="text-zinc-400 mt-2">Instant answers to your legal queries</p>
+                        </div>
+                        <div class="text-6xl">🤖</div>
+                    </div>
+                    <button onclick="event.stopImmediatePropagation();openAIAssistant()" 
+                            class="mt-12 w-full py-6 bg-white text-zinc-900 rounded-3xl font-semibold">
+                        ASK ANYTHING
+                    </button>
+                </div>
+
+                <!-- Government Connect -->
+                <div class="glass p-8 rounded-3xl dashboard-card">
+                    <h3 class="text-2xl font-semibold">Government Connect</h3>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="text-center py-6 border border-white/10 rounded-2xl hover:border-blue-500 cursor-pointer">
+                            <div class="text-3xl mb-2">📬</div>
+                            <div class="text-sm">RTI</div>
+                        </div>
+                        <div class="text-center py-6 border border-white/10 rounded-2xl hover:border-blue-500 cursor-pointer">
+                            <div class="text-3xl mb-2">🏛️</div>
+                            <div class="text-sm">eCourts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Law Library Quick -->
+                <div onclick="navigateToSection('library')" class="glass p-8 rounded-3xl dashboard-card cursor-pointer">
+                    <h3 class="text-2xl font-semibold mb-8">Law Library</h3>
+                    <div class="space-y-6 text-sm">
+                        <div class="flex justify-between"><span>Constitution</span><span class="text-blue-400">→</span></div>
+                        <div class="flex justify-between"><span>BNS 2023</span><span class="text-blue-400">→</span></div>
+                        <div class="flex justify-between"><span>RTI Act</span><span class="text-blue-400">→</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="mt-16">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-semibold">Recent Activity</h2>
+                    <a href="#" class="text-blue-400 text-sm">View all activity →</a>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="glass p-6 rounded-3xl flex gap-6 items-center">
+                        <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-3xl">✓</div>
+                        <div class="flex-1">
+                            <div class="font-medium">Complaint #JN-48721 resolved</div>
+                            <div class="text-xs text-zinc-400">Water supply issue • Municipal Corporation • 2 days ago</div>
+                        </div>
+                        <span class="text-emerald-400 text-sm font-medium">RESOLVED</span>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-3xl flex gap-6 items-center">
+                        <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-3xl">📣</div>
+                        <div class="flex-1">
+                            <div class="font-medium">New update on Save Ganga Campaign</div>
+                            <div class="text-xs text-zinc-400">Petition submitted to NGT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button onclick="fileNewComplaint()" 
+            class="fixed bottom-8 right-8 lg:right-12 w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-3xl shadow-2xl shadow-blue-600/50 z-50">
+        +
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        function switchRole(n) {
+            document.querySelectorAll('[id^="role-"]').forEach((el, i) => {
+                if (i === n) {
+                    el.classList.add('nav-active');
+                } else {
+                    el.classList.remove('nav-active');
+                }
+            });
+        }
+
+        function viewComplaints() {
+            alert("Opening My Complaints section...");
+        }
+
+        function viewCampaigns() {
+            alert("Loading your active campaigns...");
+        }
+
+        function openAIAssistant() {
+            alert("AI Legal Assistant opened. Ask your legal question.");
+        }
+
+        function showNotifications() {
+            alert("3 new notifications:\n• Campaign milestone reached\n• Complaint update\n• New law amendment");
+        }
+
+        function showProfileMenu() {
+            alert("Profile options would appear here.");
+        }
+
+        function logout() {
+            if (confirm("Logout from ARIZOE JUSTICE?")) {
+                window.location.href = "login.html";
+            }
+        }
+
+        function fileNewComplaint() {
+            alert("New complaint form would load here.");
+        }
+
+        function navigateToSection(section) {
+            alert(`Navigating to ${section} section...`);
+        }
+
+        // Initialize dashboard
+        window.addEventListener('load', () => {
+            console.log('%cARIZOE JUSTICE Dashboard loaded successfully', 'color:#60a5fa; font-family:monospace');
+        });
+    </script>
+</body>
+</html>
+```
