@@ -133,3 +133,38 @@ transition:0.3s;
 background:#ffffff;
 color:#2563eb;
 }
+.movement{
+max-width:1200px;
+margin:60px auto;
+padding:40px 20px;
+text-align:center;
+}
+
+.movement h2{
+color:#38bdf8;
+margin-bottom:15px;
+}
+
+.movement p{
+color:#cbd5e1;
+}
+
+.movement-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.movement-box div{
+background:#161b22;
+padding:25px;
+border-radius:15px;
+border:1px solid #2b3240;
+transition:.3s;
+}
+
+.movement-box div:hover{
+transform:translateY(-8px);
+border-color:#38bdf8;
+}
