@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ARIZOE JUSTICE - Law Library">
+    <title>Law Library • ARIZOE JUSTICE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+    <!-- TOP BAR -->
+    <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-4">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-3xl">⚖️</div>
+                <div>
+                    <span class="font-bold tracking-tighter text-3xl">ARIZOE</span>
+                    <span class="font-bold tracking-tighter text-blue-400 text-3xl">JUSTICE</span>
+                </div>
+            </div>
+            <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">← Dashboard</a>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-6 py-12">
+        <h1 class="text-4xl font-bold tracking-tighter mb-2">Digital Law Library</h1>
+        <p class="text-zinc-400 mb-10">Complete legal knowledge at your fingertips</p>
+
+        <!-- Search -->
+        <div class="mb-12">
+            <input type="text" id="law-search" 
+                   class="w-full bg-zinc-900 border border-zinc-700 focus:border-blue-500 rounded-3xl py-6 px-8 text-lg outline-none" 
+                   placeholder="Search Constitution, BNS, RTI, Judgments...">
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Law Card -->
+            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
+                <div class="text-4xl mb-6">📜</div>
+                <h3 class="font-semibold text-xl">Constitution of India</h3>
+                <p class="text-zinc-400 text-sm mt-2">Fundamental Rights, DPSP, Amendments</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
+                <div class="text-4xl mb-6">⚖️</div>
+                <h3 class="font-semibold text-xl">Bharatiya Nyaya Sanhita (BNS)</h3>
+                <p class="text-zinc-400 text-sm mt-2">New Criminal Laws replacing IPC</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
+                <div class="text-4xl mb-6">📋</div>
+                <h3 class="font-semibold text-xl">Right to Information (RTI)</h3>
+                <p class="text-zinc-400 text-sm mt-2">Filing process and timelines</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
+                <div class="text-4xl mb-6">👩</div>
+                <h3 class="font-semibold text-xl">Women & Child Rights</h3>
+                <p class="text-zinc-400 text-sm mt-2">POCSO, Domestic Violence Act</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
+                <div class="text-4xl mb-6">💻</div>
+                <h3 class="font-semibold text-xl">Cyber Laws & IT Act</h3>
+                <p class="text-zinc-400 text-sm mt-2">Data protection and online frauds</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
