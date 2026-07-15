@@ -4,222 +4,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ARIZOE JUSTICE - Secure Digital Justice Dashboard">
-    <title>Dashboard • ARIZOE JUSTICE</title>
+    <meta name="description" content="ARIZOE JUSTICE - Digital Justice Command Center">
+    <title>Command Center • ARIZOE JUSTICE</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen" id="dashboard-page">
-    <!-- TOP NAV -->
-    <nav class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50" aria-label="Main navigation">
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+    <!-- TOP BAR -->
+    <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-x-4">
-                <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-3xl shadow-inner">⚖️</div>
-                <div class="font-bold tracking-tighter text-3xl">ARIZOE <span class="text-blue-400">JUSTICE</span></div>
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-3xl">⚖️</div>
+                <div>
+                    <span class="font-bold tracking-tighter text-3xl">ARIZOE</span>
+                    <span class="font-bold tracking-tighter text-blue-400 text-3xl">JUSTICE</span>
+                </div>
             </div>
 
-            <div class="flex items-center gap-x-8">
-                <!-- Role Switcher -->
-                <div class="hidden md:flex items-center bg-zinc-800 rounded-3xl text-sm p-1" id="role-switcher">
-                    <button data-role="0" class="role-btn px-7 py-3 rounded-3xl nav-active">Citizen</button>
-                    <button data-role="1" class="role-btn px-7 py-3 rounded-3xl">Member</button>
-                    <button data-role="2" class="role-btn px-7 py-3 rounded-3xl">Council</button>
-                    <button data-role="3" class="role-btn px-7 py-3 rounded-3xl">Founder</button>
-                </div>
+            <div class="flex-1 max-w-xl mx-12 relative hidden md:block">
+                <input type="text" id="global-search" class="w-full bg-zinc-800 border border-zinc-700 focus:border-blue-500 rounded-3xl py-4 pl-14 text-sm outline-none" placeholder="Search across platform...">
+                <i class="fa-solid fa-magnifying-glass absolute left-6 top-4 text-zinc-400"></i>
+            </div>
 
-                <div class="flex items-center gap-x-6">
-                    <!-- Search -->
-                    <div class="relative group">
-                        <input type="text" id="global-search" 
-                               class="bg-zinc-800 border border-white/10 focus:border-blue-500 w-72 pl-12 py-3 rounded-3xl text-sm outline-none transition-all"
-                               placeholder="Search complaints, laws, campaigns..." aria-label="Global search">
-                        <i class="fa-solid fa-magnifying-glass absolute left-5 top-3.5 text-zinc-400"></i>
+            <!-- Role Switcher -->
+            <div class="hidden md:flex items-center bg-zinc-800 rounded-3xl text-sm p-1 mx-8">
+                <button onclick="switchRole(0)" class="role-btn px-6 py-2.5 rounded-3xl bg-blue-600 text-white">Citizen</button>
+                <button onclick="switchRole(1)" class="role-btn px-6 py-2.5 rounded-3xl">Member</button>
+                <button onclick="switchRole(2)" class="role-btn px-6 py-2.5 rounded-3xl">Partner</button>
+                <button onclick="switchRole(3)" class="role-btn px-6 py-2.5 rounded-3xl">Executive</button>
+                <button onclick="switchRole(4)" class="role-btn px-6 py-2.5 rounded-3xl">Founder</button>
+            </div>
+
+            <div class="flex items-center gap-x-6">
+                <button id="notification-btn" class="relative text-2xl hover:text-blue-400 transition-colors">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">3</span>
+                </button>
+                <div class="flex items-center gap-x-3 cursor-pointer">
+                    <div class="text-right">
+                        <div class="font-semibold text-sm">{{user.name}}</div>
+                        <div class="text-xs text-emerald-400">{{user.role}}</div>
                     </div>
-
-                    <!-- Notifications -->
-                    <button id="notification-btn" class="relative text-2xl hover:text-blue-400 transition-colors" aria-label="Notifications">
-                        <i class="fa-solid fa-bell"></i>
-                        <span id="notif-count" class="absolute -top-1 -right-1 text-[10px] bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full">4</span>
-                    </button>
-
-                    <!-- Profile -->
-                    <div id="profile-trigger" class="flex items-center gap-x-3 cursor-pointer">
-                        <div class="text-right text-sm">
-                            <div id="user-name" class="font-semibold">{{user.name}}</div>
-                            <div id="user-role" class="text-emerald-400 text-xs">{{user.role}}</div>
-                        </div>
-                        <div id="user-avatar" class="w-9 h-9 bg-gradient-to-br from-blue-400 to-cyan-300 rounded-2xl flex items-center justify-center font-bold text-zinc-900">{{user.initials}}</div>
-                    </div>
+                    <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-300 text-zinc-900 font-bold rounded-2xl flex items-center justify-center">{{user.initials}}</div>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
     <div class="flex max-w-screen-2xl mx-auto">
-        <!-- Sidebar -->
-        <aside class="hidden xl:block w-72 border-r border-zinc-800 bg-zinc-900 min-h-screen p-6" aria-label="Sidebar navigation">
+        <!-- SIDEBAR -->
+        <nav class="hidden xl:block w-72 border-r border-zinc-800 bg-zinc-900 min-h-screen p-6" aria-label="Main sidebar">
             <div class="space-y-1">
-                <a href="#" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl bg-blue-500/10 text-blue-400 sidebar-link">
-                    <i class="fa-solid fa-house w-5"></i>
-                    <span class="font-medium">Overview</span>
+                <a href="#" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl bg-blue-600/10 text-blue-400">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="font-medium">Dashboard</span>
                 </a>
-                <a href="complaint.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5 sidebar-link">
-                    <i class="fa-solid fa-file-circle-plus w-5"></i>
-                    <span class="font-medium">File Complaint</span>
+                <a href="complaint.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                    <span class="font-medium">Complaints</span>
                 </a>
-                <a href="#" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5 sidebar-link">
-                    <i class="fa-solid fa-list-check w-5"></i>
-                    <span class="font-medium">Track Complaints</span>
-                </a>
-                <a href="campaigns.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5 sidebar-link">
-                    <i class="fa-solid fa-users w-5"></i>
+                <a href="campaigns.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
+                    <i class="fa-solid fa-flag"></i>
                     <span class="font-medium">Campaigns</span>
                 </a>
-                <a href="library.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5 sidebar-link">
-                    <i class="fa-solid fa-book-open w-5"></i>
+                <a href="library.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
+                    <i class="fa-solid fa-book"></i>
                     <span class="font-medium">Law Library</span>
                 </a>
-                <a href="ai.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5 sidebar-link">
-                    <i class="fa-solid fa-robot w-5"></i>
-                    <span class="font-medium">AI Assistant</span>
+                <a href="ai.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
+                    <i class="fa-solid fa-robot"></i>
+                    <span class="font-medium">AI Center</span>
+                </a>
+                <a href="government.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
+                    <i class="fa-solid fa-landmark"></i>
+                    <span class="font-medium">Government Connect</span>
+                </a>
+                <a href="media.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
+                    <i class="fa-solid fa-play"></i>
+                    <span class="font-medium">Media Center</span>
                 </a>
             </div>
-            
-            <div class="mt-16 px-5">
-                <div class="text-xs uppercase tracking-widest text-zinc-500 mb-4">Justice Movement</div>
-                <div class="flex flex-col gap-y-6 text-sm">
-                    <a href="#" class="hover:text-blue-400">Active Campaigns</a>
-                    <a href="#" class="hover:text-blue-400">Trending Issues</a>
-                    <a href="#" class="hover:text-blue-400">Public Petitions</a>
-                </div>
-            </div>
-        </aside>
+        </nav>
 
-        <!-- MAIN DASHBOARD CONTENT -->
-        <main class="flex-1 p-6 md:p-10">
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 p-8">
             <div class="max-w-7xl mx-auto">
-                <!-- Welcome Header -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-                    <div>
-                        <h1 class="text-5xl font-bold tracking-tighter">Welcome back, <span id="welcome-name">{{user.name}}</span></h1>
-                        <p class="text-zinc-400 mt-2">Your justice dashboard • {{user.id}}</p>
-                    </div>
-                    <button id="new-complaint-btn" 
-                            class="mt-6 md:mt-0 bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-3xl flex items-center gap-x-3 font-semibold">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>File New Complaint</span>
-                    </button>
+                <!-- Welcome -->
+                <div class="mb-12">
+                    <h1 class="text-5xl font-bold tracking-tighter">Welcome back, {{user.name}}</h1>
+                    <p class="text-zinc-400">Central hub for digital justice operations</p>
                 </div>
 
-                <!-- Live Transparency Counters -->
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-12">
-                    <div class="glass rounded-3xl p-6 text-center dash-card">
-                        <div class="text-emerald-400 text-4xl font-mono font-bold" data-count="18429">0</div>
-                        <div class="text-xs text-zinc-400 mt-2">Total Complaints</div>
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div class="glass rounded-3xl p-8">
+                        <div class="text-emerald-400 text-sm">Complaints</div>
+                        <div class="text-5xl font-mono font-bold mt-3">{{stats.complaints}}</div>
                     </div>
-                    <div class="glass rounded-3xl p-6 text-center dash-card">
-                        <div class="text-cyan-400 text-4xl font-mono font-bold" data-count="12684">0</div>
-                        <div class="text-xs text-zinc-400 mt-2">Resolved</div>
+                    <div class="glass rounded-3xl p-8">
+                        <div class="text-blue-400 text-sm">Campaigns</div>
+                        <div class="text-5xl font-mono font-bold mt-3">{{stats.campaigns}}</div>
                     </div>
-                    <div class="glass rounded-3xl p-6 text-center dash-card">
-                        <div class="text-amber-400 text-4xl font-mono font-bold" data-count="342">0</div>
-                        <div class="text-xs text-zinc-400 mt-2">Active Campaigns</div>
+                    <div class="glass rounded-3xl p-8">
+                        <div class="text-purple-400 text-sm">AI Checks</div>
+                        <div class="text-5xl font-mono font-bold mt-3">{{stats.aiChecks}}</div>
                     </div>
-                    <div class="glass rounded-3xl p-6 text-center dash-card">
-                        <div class="text-violet-400 text-4xl font-mono font-bold" data-count="874">0</div>
-                        <div class="text-xs text-zinc-400 mt-2">RTIs Filed</div>
+                    <div class="glass rounded-3xl p-8">
+                        <div class="text-amber-400 text-sm">RTIs</div>
+                        <div class="text-5xl font-mono font-bold mt-3">{{stats.rtis}}</div>
                     </div>
                 </div>
 
-                <!-- Role Adaptive Panels -->
-                <div id="citizen-content" class="role-content">
-                    <div class="grid md:grid-cols-12 gap-8">
-                        <!-- Complaints & Activity -->
-                        <div class="md:col-span-7 space-y-8">
-                            <div class="glass rounded-3xl p-8">
-                                <div class="flex justify-between mb-8">
-                                    <h2 class="font-semibold text-2xl">My Recent Complaints</h2>
-                                    <a href="complaint.html" class="text-blue-400 text-sm">All Complaints →</a>
-                                </div>
-                                <div class="space-y-6" id="recent-complaints">
-                                    <!-- Populated by JS -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Sidebar Content -->
-                        <div class="md:col-span-5 space-y-8">
-                            <!-- ARIZOE UNFILTERED -->
-                            <div class="glass rounded-3xl p-8">
-                                <h2 class="font-semibold text-xl mb-6 flex items-center gap-x-3">
-                                    <span class="text-red-400">▶</span> ARIZOE UNFILTERED
-                                </h2>
-                                <div class="space-y-4">
-                                    <div class="flex gap-4">
-                                        <div class="w-28 h-20 bg-zinc-700 rounded-2xl"></div>
-                                        <div class="flex-1">
-                                            <div class="font-medium text-sm">Supreme Court Hearing on New Criminal Laws</div>
-                                            <div class="text-xs text-zinc-400">14K views • 2h ago</div>
-                                        </div>
+                <div class="grid md:grid-cols-12 gap-8">
+                    <!-- Recent Activity -->
+                    <div class="md:col-span-7">
+                        <div class="glass rounded-3xl p-8">
+                            <h2 class="text-xl font-semibold mb-8">Recent Activity</h2>
+                            <div class="space-y-6">
+                                <div class="flex gap-6">
+                                    <div class="text-emerald-400">
+                                        <i class="fa-solid fa-check-circle text-2xl"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">{{activity.recent1.title}}</div>
+                                        <div class="text-xs text-zinc-400">{{activity.recent1.time}}</div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Government Connect -->
-                            <div class="glass rounded-3xl p-8">
-                                <h2 class="font-semibold text-xl mb-6">Government Connect</h2>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="text-center p-4 hover:bg-white/5 rounded-2xl cursor-pointer">RTI</div>
-                                    <div class="text-center p-4 hover:bg-white/5 rounded-2xl cursor-pointer">eCourts</div>
-                                    <div class="text-center p-4 hover:bg-white/5 rounded-2xl cursor-pointer">CPGRAMS</div>
+                        <!-- Activity Timeline -->
+                        <div class="glass rounded-3xl p-8 mt-8">
+                            <h2 class="text-xl font-semibold mb-8">Activity Timeline</h2>
+                            <div class="space-y-6 border-l border-zinc-700 pl-8">
+                                <div class="relative">
+                                    <div class="absolute -left-[9px] w-4 h-4 bg-blue-500 rounded-full"></div>
+                                    <div class="font-medium">{{timeline.item1}}</div>
+                                    <div class="text-xs text-zinc-400">{{timeline.time1}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Access + Recent Notifications -->
+                    <div class="md:col-span-5 space-y-8">
+                        <div class="glass rounded-3xl p-8">
+                            <h2 class="text-xl font-semibold mb-8">Quick Access</h2>
+                            <div class="grid grid-cols-2 gap-4">
+                                <a href="complaint.html" class="glass p-6 rounded-3xl hover:bg-white/5">File Complaint</a>
+                                <a href="campaigns.html" class="glass p-6 rounded-3xl hover:bg-white/5">Join Campaign</a>
+                                <a href="ai.html" class="glass p-6 rounded-3xl hover:bg-white/5">AI Assistant</a>
+                                <a href="library.html" class="glass p-6 rounded-3xl hover:bg-white/5">Law Library</a>
+                            </div>
+                        </div>
+
+                        <!-- Recent Notifications -->
+                        <div class="glass rounded-3xl p-8">
+                            <h2 class="text-xl font-semibold mb-8">Recent Notifications</h2>
+                            <div class="space-y-5">
+                                <div class="text-sm flex gap-3">
+                                    <i class="fa-solid fa-circle text-emerald-400 mt-1"></i>
+                                    <div>{{notification.recent1}}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Founder Panel (hidden by default) -->
-                <div id="founder-content" class="role-content hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="glass rounded-3xl p-8">
-                            <h2 class="font-semibold mb-6">Complaint Verification Queue</h2>
-                            <div class="text-sm space-y-6">
-                                <div class="flex justify-between items-center">
-                                    <span>Water contamination - Delhi</span>
-                                    <span class="text-amber-400">Pending Review</span>
-                                </div>
-                            </div>
+                <!-- Recent Sections -->
+                <div class="mt-12 grid md:grid-cols-3 gap-8">
+                    <div class="glass rounded-3xl p-8">
+                        <h3 class="font-semibold mb-6">Recent Complaints</h3>
+                        <div class="space-y-4">
+                            <div class="text-sm">{{recent.complaint1}}</div>
                         </div>
-                        <div class="glass rounded-3xl p-8">
-                            <h2 class="font-semibold mb-6">Platform Analytics</h2>
-                            <div class="h-64 bg-zinc-800 rounded-2xl"></div>
+                    </div>
+                    <div class="glass rounded-3xl p-8">
+                        <h3 class="font-semibold mb-6">Recent Campaigns</h3>
+                        <div class="space-y-4">
+                            <div class="text-sm">{{recent.campaign1}}</div>
+                        </div>
+                    </div>
+                    <div class="glass rounded-3xl p-8">
+                        <h3 class="font-semibold mb-6">ARIZOE UNFILTERED</h3>
+                        <div class="space-y-4">
+                            <div class="text-sm">{{recent.media1}}</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Transparency & Movement -->
-                <div class="mt-16 glass rounded-3xl p-10">
-                    <h2 class="font-semibold text-2xl mb-8">Digital Justice Movement</h2>
-                    <div class="grid md:grid-cols-4 gap-8">
-                        <div class="text-center">
-                            <div class="text-5xl font-mono">142k</div>
-                            <div class="text-xs text-zinc-400">Active Citizens</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-5xl font-mono">87</div>
-                            <div class="text-xs text-zinc-400">Live Campaigns</div>
-                        </div>
+                <!-- Government Connect -->
+                <div class="mt-12">
+                    <h3 class="font-semibold mb-6">Government Connect</h3>
+                    <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">Supreme Court</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">High Courts</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">eCourts</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">RTI</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">CPGRAMS</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">Consumer Portal</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">Election Commission</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">NCRB</a>
+                        <a href="government.html" class="glass p-6 rounded-3xl text-center text-sm">UIDAI</a>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Notification Panel (hidden) -->
-    <div id="notification-panel" class="hidden fixed top-20 right-8 w-96 glass rounded-3xl shadow-2xl p-6 z-50">
-        <h3 class="font-semibold mb-6">Notifications</h3>
-        <!-- JS populated -->
-    </div>
+    <!-- FOOTER -->
+    <footer class="bg-zinc-900 border-t border-zinc-800 py-8 mt-20">
+        <div class="max-w-screen-2xl mx-auto px-8 text-xs text-zinc-500 flex flex-wrap justify-between items-center">
+            <div>© ARIZOE JUSTICE 2026. All Rights Reserved.</div>
+            <div class="flex gap-x-8">
+                <a href="about.html" class="hover:text-zinc-300">About</a>
+                <a href="privacy.html" class="hover:text-zinc-300">Privacy</a>
+                <a href="terms.html" class="hover:text-zinc-300">Terms</a>
+                <a href="contact.html" class="hover:text-zinc-300">Contact</a>
+            </div>
+            <div>Version 24.07.15</div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
