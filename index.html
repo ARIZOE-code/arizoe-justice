@@ -1,134 +1,347 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ARIZOE JUSTICE</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ARIZOE JUSTICE - India's Digital Justice Platform. Report issues, join campaigns, learn law, verify facts with AI, and connect with government resources.">
+    <meta name="keywords" content="digital justice, india, citizen rights, RTI, PIL, complaint portal, law library, AI fact check, constitutional awareness">
+    <meta name="author" content="ARIZOE UNFILTERED">
+    <title>ARIZOE JUSTICE | Justice Through Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        :root {
+            --primary-blue: #3b82f6;
+        }
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            color: #60a5fa;
+            transform: translateY(-2px);
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+    </style>
 </head>
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
+    <!-- STICKY NAVIGATION -->
+    <nav id="navbar" class="bg-zinc-950 border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-lg shadow-blue-500/50">
+                    ⚖️
+                </div>
+                <div>
+                    <span class="text-2xl font-bold tracking-tighter">ARIZOE</span>
+                    <span class="text-2xl font-bold tracking-tighter text-blue-400">JUSTICE</span>
+                </div>
+            </div>
 
-<body>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#home" onclick="document.getElementById('hero').scrollIntoView({ behavior: 'smooth' })" class="nav-link text-zinc-300 hover:text-white">Home</a>
+                <a href="#about" onclick="document.getElementById('movement').scrollIntoView({ behavior: 'smooth' })" class="nav-link text-zinc-300 hover:text-white">About</a>
+                <a href="#campaigns" onclick="document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' })" class="nav-link text-zinc-300 hover:text-white">Campaigns</a>
+                <a href="#complaint" onclick="document.getElementById('complaint').scrollIntoView({ behavior: 'smooth' })" class="nav-link text-zinc-300 hover:text-white">Complaint</a>
+                <a href="#law-library" onclick="document.getElementById('law-library').scrollIntoView({ behavior: 'smooth' })" class="nav-link text-zinc-300 hover:text-white">Law Library</a>
+                <a href="#news" onclick="document.getElementById('news').scrollIntoView({ behavior: 'smooth' })" class="nav-link text-zinc-300 hover:text-white">News</a>
+                <a href="#rti" class="nav-link text-zinc-300 hover:text-white">RTI</a>
+                <a href="#pil" class="nav-link text-zinc-300 hover:text-white">PIL</a>
+            </div>
 
-<header id="hero">
+            <div class="flex items-center gap-x-4">
+                <a href="#" 
+                   class="hidden sm:flex items-center gap-x-2 px-6 py-3 text-sm font-semibold border border-zinc-700 hover:border-blue-500 rounded-3xl transition-colors">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Dashboard</span>
+                </a>
+                <button onclick="alert('Login functionality would be implemented here in production')"
+                        class="bg-white text-zinc-900 hover:bg-blue-50 px-8 py-3.5 text-sm font-semibold rounded-3xl transition-all active:scale-95">
+                    Login
+                </button>
+                <!-- Mobile Hamburger -->
+                <button class="md:hidden w-11 h-11 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-<div class="overlay">
+    <!-- HERO SECTION -->
+    <header id="hero" class="hero-bg min-h-screen flex items-center relative">
+        <div class="absolute inset-0 bg-[radial-gradient(at_bottom_right,#3b82f660_0%,transparent_70%)]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 pt-20 pb-24 grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-x-2 bg-white/10 text-blue-300 text-sm font-medium px-5 py-2 rounded-3xl border border-white/20">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    NATIONWIDE DIGITAL MOVEMENT
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold leading-none tracking-tighter">
+                    JUSTICE THROUGH<br>
+                    <span class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">SOLUTIONS</span>
+                </h1>
+                
+                <p class="text-xl text-zinc-400 max-w-md">
+                    India's premier digital justice platform empowering citizens with tools for accountability, legal awareness, and systemic change.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="document.getElementById('complaint').scrollIntoView({ behavior: 'smooth' })"
+                            class="bg-blue-600 hover:bg-blue-700 px-10 py-5 rounded-3xl font-semibold text-lg flex items-center gap-x-3 transition-all active:scale-95">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        <span>Report Problem</span>
+                    </button>
+                    
+                    <button onclick="document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' })"
+                            class="border border-white/60 hover:border-white px-10 py-5 rounded-3xl font-semibold text-lg transition-all">
+                        Join Campaign
+                    </button>
+                </div>
+                
+                <div class="flex items-center gap-x-8 pt-6">
+                    <a href="#law-library" 
+                       class="flex items-center gap-x-3 group">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                            📚
+                        </div>
+                        <div>
+                            <div class="text-sm text-zinc-400">Explore</div>
+                            <div class="font-semibold">Law Library</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#" 
+                       class="flex items-center gap-x-3 group">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                            ▶️
+                        </div>
+                        <div>
+                            <div class="text-sm text-zinc-400">Watch</div>
+                            <div class="font-semibold">ARIZOE UNFILTERED</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="pt-8 flex items-center gap-x-8 text-sm">
+                    <div class="flex items-center gap-x-2">
+                        <div class="flex -space-x-4">
+                            <div class="w-7 h-7 bg-blue-500 border-2 border-zinc-900 rounded-full"></div>
+                            <div class="w-7 h-7 bg-cyan-500 border-2 border-zinc-900 rounded-full"></div>
+                        </div>
+                        <div class="text-zinc-400 text-xs leading-tight">
+                            Trusted by<br>
+                            <span class="text-white font-medium">1.2M+ Citizens</span>
+                        </div>
+                    </div>
+                    <div class="h-9 w-px bg-white/20"></div>
+                    <div class="text-emerald-400 text-sm font-medium flex items-center gap-x-1">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>SECURE &amp; ANONYMOUS</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Visual -->
+            <div class="relative hidden md:block">
+                <div class="absolute -inset-10 bg-gradient-to-br from-blue-500/20 to-transparent rounded-[4rem] -rotate-6"></div>
+                <div class="relative bg-zinc-900 rounded-3xl p-3 shadow-2xl border border-white/10">
+                    <img src="https://picsum.photos/id/1015/800/620" 
+                         alt="Justice in action - Indian citizens participating in digital movement" 
+                         class="rounded-2xl w-full object-cover h-[520px]">
+                    <div class="absolute bottom-8 left-8 glass px-6 py-4 rounded-3xl border border-white/20 max-w-[260px]">
+                        <div class="flex items-center gap-x-3">
+                            <div class="text-emerald-400">
+                                <i class="fa-solid fa-check-circle text-3xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Complaint #JN48291 Resolved</div>
+                                <div class="text-xs text-zinc-400">Municipal water contamination • 14 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-12 left-1/2 hidden md:flex flex-col items-center">
+            <div class="text-xs tracking-[3px] text-zinc-500 mb-3">SCROLL TO EXPLORE</div>
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-zinc-400 to-transparent"></div>
+        </div>
+    </header>
 
-<h1>⚖️ ARIZOE JUSTICE</h1>
+    <!-- OFFICIAL SOCIAL NETWORK -->
+    <section id="social" class="py-20 bg-zinc-900 border-t border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="px-5 py-2 bg-blue-950 text-blue-400 text-sm font-medium rounded-3xl">OFFICIAL CHANNELS</span>
+                <h2 class="text-4xl font-semibold mt-4">Join the ARIZOE Movement</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-6">
+                <!-- YouTube -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        ▶
+                    </div>
+                    <div class="font-semibold mb-1">YouTube</div>
+                    <div class="text-xs text-zinc-400">@arizoeunfiltered</div>
+                    <div class="mt-8 text-emerald-400 text-xs flex items-center gap-x-1">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <span>Live Sessions</span>
+                    </div>
+                </a>
+                
+                <!-- Instagram -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 via-purple-500 to-yellow-500 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        📷
+                    </div>
+                    <div class="font-semibold mb-1">Instagram</div>
+                    <div class="text-xs text-zinc-400">@arizoejustice</div>
+                </a>
+                
+                <!-- Facebook -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        f
+                    </div>
+                    <div class="font-semibold mb-1">Facebook</div>
+                    <div class="text-xs text-zinc-400">ARIZOE Justice</div>
+                </a>
+                
+                <!-- WhatsApp -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        💬
+                    </div>
+                    <div class="font-semibold mb-1">WhatsApp</div>
+                    <div class="text-xs text-zinc-400">Community Chat</div>
+                </a>
+                
+                <!-- Telegram -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-sky-500 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        ✈️
+                    </div>
+                    <div class="font-semibold mb-1">Telegram</div>
+                    <div class="text-xs text-zinc-400">Updates &amp; Alerts</div>
+                </a>
+                
+                <!-- X -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-black rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        𝕏
+                    </div>
+                    <div class="font-semibold mb-1">X / Twitter</div>
+                    <div class="text-xs text-zinc-400">@arizoejustice</div>
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="#" class="glass border border-white/10 rounded-3xl p-6 card-hover group">
+                    <div class="w-14 h-14 bg-blue-700 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                        𝕚
+                    </div>
+                    <div class="font-semibold mb-1">LinkedIn</div>
+                    <div class="text-xs text-zinc-400">ARIZOE Network</div>
+                </a>
+            </div>
+        </div>
+    </section>
 
-<p>Justice Through Solutions</p>
+    <!-- DIGITAL JUSTICE MOVEMENT -->
+    <section id="movement" class="py-24 bg-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-center">
+                <!-- Left content -->
+                <div class="md:col-span-5">
+                    <span class="inline-block px-6 py-2 bg-amber-900/60 text-amber-300 text-sm rounded-3xl mb-6">THE MOVEMENT</span>
+                    <h2 class="text-5xl font-semibold leading-tight tracking-tight mb-8">
+                        Rebuilding Trust.<br>
+                        Restoring Justice.
+                    </h2>
+                    <div class="space-y-8 text-zinc-400">
+                        <div>
+                            <div class="uppercase text-xs font-mono tracking-widest text-blue-400 mb-2">MISSION</div>
+                            <p class="leading-relaxed">To democratize access to justice by providing every Indian citizen with powerful digital tools, verified legal knowledge, and direct government connectivity.</p>
+                        </div>
+                        <div>
+                            <div class="uppercase text-xs font-mono tracking-widest text-blue-400 mb-2">VISION</div>
+                            <p class="leading-relaxed">A transparent, accountable, and responsive governance ecosystem where every voice matters and every grievance finds resolution.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Values -->
+                <div class="md:col-span-7">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Justice -->
+                        <div class="glass border border-white/10 p-8 rounded-3xl card-hover">
+                            <div class="text-6xl mb-6">⚖️</div>
+                            <h3 class="text-2xl font-semibold mb-3">Justice</h3>
+                            <p class="text-zinc-400">Swift, fair, and accessible resolution for every citizen regardless of background.</p>
+                            <div class="mt-10 h-1.5 w-16 bg-blue-500 rounded"></div>
+                        </div>
+                        
+                        <!-- Technology -->
+                        <div class="glass border border-white/10 p-8 rounded-3xl card-hover">
+                            <div class="text-6xl mb-6">💻</div>
+                            <h3 class="text-2xl font-semibold mb-3">Technology</h3>
+                            <p class="text-zinc-400">AI-powered verification, blockchain-tracked complaints, and seamless digital interfaces.</p>
+                            <div class="mt-10 h-1.5 w-16 bg-cyan-400 rounded"></div>
+                        </div>
+                        
+                        <!-- Transparency -->
+                        <div class="glass border border-white/10 p-8 rounded-3xl card-hover">
+                            <div class="text-6xl mb-6">🔍</div>
+                            <h3 class="text-2xl font-semibold mb-3">Transparency</h3>
+                            <p class="text-zinc-400">Real-time dashboards, public audit trails, and open data for government performance.</p>
+                            <div class="mt-10 h-1.5 w-16 bg-emerald-400 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<nav>
-<div class="hero-buttons">
-
-<a href="#">⚖ Report Problem</a>
-
-<a href="#">📢 Join Campaign</a>
-
-<a href="#">🎥 ARIZOE UNFILTERED</a>
-
-</div>
-
-<section class="social-links">
-
-<h3>Official Network</h3>
-
-<a href="#">▶ YouTube</a>
-
-<a href="#">📸 Instagram</a>
-
-<a href="#">👍 Facebook</a>
-
-<a href="#">📘 Facebook Page</a>
-
-<a href="#">💬 WhatsApp</a>
-
-<a href="#">✈ Telegram</a>
-
-</section>
-<a href="#">Home</a>
-
-<a href="#">Library</a>
-
-<a href="#">News</a>
-
-<a href="#">PIL</a>
-
-<a href="#">Complaint</a>
-
-<a href="#">Contact</a>
-
-</nav>
-
-</div>
-
-</header>
-<section class="movement">
-
-<h2>🔥 DIGITAL JUSTICE MOVEMENT</h2>
-
-<p>
-We don't just raise problems.
-We build solutions through research, awareness, legal action and public participation.
-</p>
-
-<div class="movement-box">
-
-<div>
-<h3>📢 Active Campaigns</h3>
-<p>Join ongoing public campaigns.</p>
-</div>
-
-<div>
-<h3>⚖ Public Justice</h3>
-<p>Support lawful and constitutional reforms.</p>
-</div>
-
-<div>
-<h3>🤝 Community Action</h3>
-<p>Together we create real impact.</p>
-</div>
-
-</div>
-
-</section>
-<main>
-
-<section class="features">
-
-<div class="card">
-<h2>⚖️ Justice Portal</h2>
-<p>Verified public complaints and digital justice system.</p>
-</div>
-
-<div class="card">
-<h2>📚 Law Library</h2>
-<p>Constitution, BNS, BNSS, Evidence Act and legal resources.</p>
-</div>
-
-<div class="card">
-<h2>📰 News & Research</h2>
-<p>Legal news, judgments and verified updates.</p>
-</div>
-
-<div class="card">
-<h2>🤖 AI Justice</h2>
-<p>AI powered legal guidance and document assistance.</p>
-</div>
-
-</section>
-
-</main>
-
-<footer>
-
-<p>© 2026 ARIZOE JUSTICE</p>
-
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+    <!-- FEATURED CAMPAIGNS -->
+    <section id="campaigns" class="py-20 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-blue-400 text-sm font-medium">ACTIVE MOVEMENTS</span>
+                    <h2 class="text-4xl font-semibold">Featured Campaigns</h2>
+                </div>
+                <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center gap-x-2 text-sm font-medium">
+                    VIEW ALL CAMPAIGNS 
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Campaign 1 -->
+                <div class="bg-zinc-800 rounded-3xl overflow-hidden card-hover border border-white/5">
+                    <img src="https://picsum.photos/id/1016/600/340" alt="Clean Rivers Campaign" class="w-full h-56 object-cover">
+                    <div class="p-8">
+                 
