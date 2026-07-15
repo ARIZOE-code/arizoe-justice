@@ -3,112 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ARIZOE JUSTICE - Digital Justice Command Center">
+    <meta name="description" content="ARIZOE JUSTICE - Command Center">
     <title>Command Center • ARIZOE JUSTICE</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --primary: 59 130 246;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .title-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link {
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            transform: translateX(8px);
+        }
+
+        .card-hover {
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.3s;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .modal {
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .live-dot {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen">
-    <!-- TOP BAR -->
+<body class="bg-zinc-950 text-zinc-100 min-h-screen overflow-hidden">
+    <!-- HEADER -->
     <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-x-4">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-3xl">⚖️</div>
+                <div onclick="switchRole()" class="w-11 h-11 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-3xl flex items-center justify-center text-4xl cursor-pointer hover:rotate-12 transition-transform">⚖️</div>
                 <div>
-                    <span class="font-bold tracking-tighter text-3xl">ARIZOE</span>
-                    <span class="font-bold tracking-tighter text-blue-400 text-3xl">JUSTICE</span>
+                    <div class="font-bold tracking-tighter text-3xl title-font">ARIZOE <span class="text-blue-400">JUSTICE</span></div>
+                    <div class="text-[10px] text-zinc-500 -mt-1">DIGITAL GOVERNANCE PLATFORM</div>
                 </div>
             </div>
 
-            <div class="flex-1 max-w-xl mx-12 relative hidden md:block">
-                <input type="text" id="global-search" class="w-full bg-zinc-800 border border-zinc-700 focus:border-blue-500 rounded-3xl py-4 pl-14 text-sm outline-none" placeholder="Search across platform...">
-                <i class="fa-solid fa-magnifying-glass absolute left-6 top-4 text-zinc-400"></i>
+            <!-- Role Switcher -->
+            <div class="flex items-center gap-x-2 bg-zinc-800 rounded-3xl p-1 text-sm">
+                <button onclick="setRole(0)" id="role-0" class="role-btn px-5 py-2 rounded-3xl transition-all active">Citizen</button>
+                <button onclick="setRole(1)" id="role-1" class="role-btn px-5 py-2 rounded-3xl transition-all">Member</button>
+                <button onclick="setRole(2)" id="role-2" class="role-btn px-5 py-2 rounded-3xl transition-all">Partner</button>
+                <button onclick="setRole(3)" id="role-3" class="role-btn px-5 py-2 rounded-3xl transition-all">Executive</button>
+                <button onclick="setRole(4)" id="role-4" class="role-btn px-5 py-2 rounded-3xl transition-all">Founder</button>
+            </div>
+
+            <div class="flex-1 max-w-md mx-8">
+                <input id="search-input" type="text" 
+                       class="w-full bg-zinc-800 border border-zinc-700 focus:border-blue-500 rounded-3xl py-3 px-6 text-sm outline-none transition-all"
+                       placeholder="Search complaints, laws, campaigns...">
             </div>
 
             <div class="flex items-center gap-x-6">
-                <button id="notification-btn" class="relative text-2xl hover:text-blue-400 transition-colors">
+                <button onclick="toggleNotifications()" class="relative text-2xl hover:text-blue-400 transition-colors">
                     <i class="fa-solid fa-bell"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">3</span>
+                    <span id="notif-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">7</span>
                 </button>
-                <div class="flex items-center gap-x-3 cursor-pointer">
-                    <div class="text-right">
-                        <div class="font-semibold text-sm">Priya Sharma</div>
-                        <div class="text-xs text-emerald-400">Verified Citizen</div>
+                
+                <div onclick="showProfileModal()" class="flex items-center gap-x-3 cursor-pointer">
+                    <div>
+                        <div id="user-name" class="font-semibold text-sm">Priya Sharma</div>
+                        <div id="user-role" class="text-xs text-emerald-400">Verified Citizen • Level 12</div>
                     </div>
-                    <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-300 text-zinc-900 font-bold rounded-2xl flex items-center justify-center">PS</div>
+                    <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center font-bold text-lg shadow-inner">PS</div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="flex max-w-screen-2xl mx-auto">
+    <div class="flex h-[calc(100vh-73px)]">
         <!-- SIDEBAR -->
-        <nav class="hidden xl:block w-72 border-r border-zinc-800 bg-zinc-900 min-h-screen p-6">
-            <div class="space-y-1">
-                <a href="#" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl bg-blue-600/10 text-blue-400">
-                    <i class="fa-solid fa-house"></i>
+        <div id="sidebar" class="sidebar w-72 bg-zinc-900 border-r border-zinc-800 flex flex-col">
+            <div class="p-6">
+                <div onclick="navigateTo('dashboard')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl bg-zinc-800 text-blue-400 cursor-pointer">
+                    <i class="fa-solid fa-house w-5"></i>
                     <span class="font-medium">Dashboard</span>
-                </a>
-                <a href="complaint.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
-                    <i class="fa-solid fa-file-circle-plus"></i>
-                    <span class="font-medium">Complaints</span>
-                </a>
-                <a href="campaigns.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
-                    <i class="fa-solid fa-flag"></i>
-                    <span class="font-medium">Campaigns</span>
-                </a>
-                <a href="library.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="font-medium">Law Library</span>
-                </a>
-                <a href="ai.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
-                    <i class="fa-solid fa-robot"></i>
-                    <span class="font-medium">AI Center</span>
-                </a>
-                <a href="government.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
-                    <i class="fa-solid fa-landmark"></i>
-                    <span class="font-medium">Government Connect</span>
-                </a>
-                <a href="media.html" class="flex items-center gap-x-4 px-5 py-4 rounded-3xl hover:bg-white/5">
-                    <i class="fa-solid fa-play"></i>
-                    <span class="font-medium">Media Center</span>
-                </a>
+                </div>
             </div>
-        </nav>
+            
+            <div class="px-3">
+                <div class="text-xs font-mono tracking-widest text-zinc-500 px-4 mb-2">OPERATIONS</div>
+                <div onclick="navigateTo('complaints')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-file-circle-exclamation w-5"></i>
+                    <span class="font-medium">My Complaints</span>
+                </div>
+                <div onclick="navigateTo('campaigns')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-flag w-5"></i>
+                    <span class="font-medium">Campaigns</span>
+                </div>
+                <div onclick="navigateTo('tracker')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-timeline w-5"></i>
+                    <span class="font-medium">Status Tracker</span>
+                </div>
+            </div>
+
+            <div class="px-3 mt-6">
+                <div class="text-xs font-mono tracking-widest text-zinc-500 px-4 mb-2">RESOURCES</div>
+                <div onclick="navigateTo('lawlib')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-book w-5"></i>
+                    <span class="font-medium">Law Library</span>
+                </div>
+                <div onclick="navigateTo('govconnect')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-building w-5"></i>
+                    <span class="font-medium">Gov Connect</span>
+                </div>
+            </div>
+
+            <div class="px-3 mt-6">
+                <div class="text-xs font-mono tracking-widest text-zinc-500 px-4 mb-2">COMMUNITY</div>
+                <div onclick="navigateTo('activity')" class="nav-link flex items-center gap-x-3 px-4 py-3 rounded-3xl hover:bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-stream w-5"></i>
+                    <span class="font-medium">Activity Feed</span>
+                </div>
+            </div>
+
+            <div class="mt-auto p-6 border-t border-zinc-800">
+                <div class="glass rounded-3xl p-5 text-center">
+                    <div class="text-amber-400 text-sm mb-1">JUSTICE SCORE</div>
+                    <div id="justice-score" class="text-5xl font-mono font-bold text-amber-400">874</div>
+                    <div class="text-xs text-zinc-400">+28 this month</div>
+                    
+                    <div class="h-2 bg-zinc-700 rounded-full mt-6 overflow-hidden">
+                        <div class="h-2 w-[87%] bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 text-xs flex justify-between text-zinc-500">
+                <div onclick="logout()" class="cursor-pointer hover:text-red-400">Logout</div>
+                <div class="flex items-center gap-x-1">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full live-dot"></div>
+                    ONLINE
+                </div>
+            </div>
+        </div>
 
         <!-- MAIN CONTENT -->
-        <main class="flex-1 p-8">
-            <div class="max-w-7xl mx-auto">
-                <h1 class="text-5xl font-bold tracking-tighter mb-2">Welcome back, Priya Sharma</h1>
-                <p class="text-zinc-400 mb-12">Central hub for digital justice operations</p>
-
-                <!-- Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                    <div class="glass rounded-3xl p-8">
-                        <div class="text-emerald-400 text-sm">Complaints</div>
-                        <div class="text-5xl font-mono font-bold mt-3">18</div>
+        <div class="flex-1 overflow-auto" id="main-content">
+            <!-- DASHBOARD -->
+            <div id="dashboard-section" class="p-8">
+                <div class="flex items-end justify-between mb-8">
+                    <div>
+                        <h1 class="text-5xl font-bold tracking-tighter title-font">Welcome back, <span id="greeting-name">Priya</span></h1>
+                        <p class="text-zinc-400">Central hub for digital justice • <span class="text-emerald-400">July 15, 2026</span></p>
                     </div>
-                    <div class="glass rounded-3xl p-8">
-                        <div class="text-blue-400 text-sm">Campaigns</div>
-                        <div class="text-5xl font-mono font-bold mt-3">7</div>
-                    </div>
-                    <div class="glass rounded-3xl p-8">
-                        <div class="text-purple-400 text-sm">AI Checks</div>
-                        <div class="text-5xl font-mono font-bold mt-3">42</div>
-                    </div>
-                    <div class="glass rounded-3xl p-8">
-                        <div class="text-amber-400 text-sm">RTIs</div>
-                        <div class="text-5xl font-mono font-bold mt-3">12</div>
+                    
+                    <div class="flex gap-x-3">
+                        <button onclick="newComplaint()" 
+                                class="flex items-center gap-x-2 bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-3xl font-medium transition-colors">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>New Complaint</span>
+                        </button>
+                        
+                        <button onclick="showAIAssistant()" 
+                                class="flex items-center gap-x-2 border border-zinc-700 hover:border-blue-400 px-6 py-3 rounded-3xl font-medium transition-colors">
+                            <i class="fa-solid fa-robot"></i>
+                            <span>AI Assistant</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Rest of your content remains same as previous version -->
-                <!-- (Recent Activity, Quick Access, Government Connect etc.) -->
+                <!-- STATS ROW -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div onclick="navigateTo('complaints')" class="glass rounded-3xl p-8 card-hover cursor-pointer">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-emerald-400 text-sm font-medium">ACTIVE COMPLAINTS</div>
+                                <div id="stat-complaints" class="text-7xl font-mono font-bold stat-number mt-2">18</div>
+                            </div>
+                            <i class="fa-solid fa-file-circle-exclamation text-5xl text-emerald-400/30"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="navigateTo('campaigns')" class="glass rounded-3xl p-8 card-hover cursor-pointer">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-blue-400 text-sm font-medium">CAMPAIGNS</div>
+                                <div id="stat-campaigns" class="text-7xl font-mono font-bold stat-number mt-2">7</div>
+                            </div>
+                            <i class="fa-solid fa-flag text-5xl text-blue-400/30"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass rounded-3xl p-8 card-hover">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-purple-400 text-sm font-medium">AI VERIFICATIONS</div>
+                                <div class="text-7xl font-mono font-bold stat-number mt-2">42</div>
+                            </div>
+                            <i class="fa-solid fa-brain text-5xl text-purple-400/30"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="glass rounded-3xl p-8 card-hover">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-amber-400 text-sm font-medium">RTI RESPONSES</div>
+                                <div class="text-7xl font-mono font-bold stat-number mt-2">12</div>
+                            </div>
+                            <i class="fa-solid fa-scale-balanced text-5xl text-amber-400/30"></i>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="grid grid-cols-12 gap-6 mt-8">
+                    <!-- LEFT COLUMN -->
+                    <div class="col-span-12 lg:col-span-7 space-y-6">
+                        <!-- COMPLAINT TIMELINE -->
+                        <div class="glass rounded-3xl p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-semibold text-lg">Complaint Timeline</h3>
+                                <span onclick="navigateTo('tracker')" class="text-blue-400 text-sm cursor-pointer hover:underline">View all →</span>
+                            </div>
+                            <div id="timeline" class="space-y-6"></div>
+                        </div>
+
+                        <!-- INTERACTIVE CHARTS -->
+                        <div class="glass rounded-3xl p-8">
+                            <h3 class="font-semibold text-lg mb-6">National Transparency Index</h3>
+                            <div class="h-80">
+                                <canvas id="transparencyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN -->
+                    <div class="col-span-12 lg:col-span-5 space-y-6">
+                        <!-- ACTIVITY FEED -->
+                        <div class="glass rounded-3xl p-8 h-full">
+                            <h3 class="font-semibold text-lg mb-6 flex items-center gap-x-2">
+                                <span>Live Activity</span>
+                                <span class="text-xs bg-emerald-400/10 text-emerald-400 px-2 py-0.5 rounded-full">LIVE</span>
+                            </h3>
+                            <div id="activity-feed" class="space-y-5 text-sm max-h-[420px] overflow-auto"></div>
+                        </div>
+
+                        <!-- ACHIEVEMENTS -->
+                        <div class="glass rounded-3xl p-8">
+                            <h3 class="font-semibold text-lg mb-4">Achievements</h3>
+                            <div class="grid grid-cols-4 gap-4">
+                                <div class="text-center">
+                                    <div class="w-12 h-12 mx-auto bg-yellow-400/10 rounded-2xl flex items-center justify-center text-3xl">🏆</div>
+                                    <div class="text-xs mt-2">First Report</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 mx-auto bg-emerald-400/10 rounded-2xl flex items-center justify-center text-3xl">🌱</div>
+                                    <div class="text-xs mt-2">Eco Hero</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 mx-auto bg-purple-400/10 rounded-2xl flex items-center justify-center text-3xl">🛡️</div>
+                                    <div class="text-xs mt-2">Guardian</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 mx-auto bg-rose-400/10 rounded-2xl flex items-center justify-center text-3xl">🔥</div>
+                                    <div class="text-xs mt-2">Hot Streak</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </main>
-    </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+            <!-- COMPLAINTS SECTION -->
+            <div id="complaints-section" class="p-8 hidden">
+                <h1 class="text-4xl font-bold mb-8">My Complaints</h1>
+                <div class="grid grid-cols-1 gap-4" id="complaints-list"></div>
+            </div>
+
+            <!-- CAMPAIGNS -->
+            <div id="campaigns-section" class="p-8 hidden">
+                <h1 class="text-4xl font-bold mb-8">Active Campaigns</h1>
+                <div id="campaigns-grid" class="grid grid-cols-3 gap-6"></div>
+            </div>
+
+            <!-- TRACKER -->
+            <div id="tracker-section" class="p-8 hidden">
+                <h1 class="text-4xl font-bold mb-8">Complaint Status Tracker</h1>
+                <div class="glass rounded-3xl p-10">
+                    <div class="flex justify-between items-center mb-12">
+                        <div class="text-center">
+                            <div class="text-emerald-400 text-6xl font-mono">92%</div>
+                            <div class="text-sm">Resolution Rate</div>
+                        </div>
+                        <div class="h-40 border-l border-zinc-700"></div>
+                        <div class="flex-1 px-12">
+                            <div class="space-y-8">
+                                <div class="flex gap-x-6 items-center">
+                                    <div class="w-6 h-6 bg-emerald-400 rounded-full flex-shrink-0"></div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Pothole on MG Road</div>
+                                        <div class="text-xs text-zinc-400">Filed 3 days ago • In Progress</div>
+                                    </div>
+                                    <div class="text-emerald-400">Stage 3/5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAW LIBRARY -->
+            <div id="lawlib-section" class="p-8 hidden">
+                <h1 class="text-4xl font-bold mb-8">Law Library Preview</h1>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="glass p-8 rounded-3xl">
+                        <h3 class="font-semibold mb-4">Constitution of India</h3>
+                        <p class="text-sm text-zinc-400">Article 21 - Protection of life and personal liberty</p>
+                        <button class="mt-6 text-blue-400 text-sm">Read full text →</button>
+                    </div>
+                    <div class="glass p-8 rounded-3xl">
+                        <h3 class="font-semibold mb-4">RTI Act 2005</h3>
+                        <p class="text-sm text-zinc-400">Right to Information - Key provisions</p>
+                        <button class="mt-6 text-blue-400 text-sm">Explore →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOVERNMENT CONNECT -->
+            <div id="govconnect-section" class="p-8 hidden">
+                <h1 class="text-4xl font-bold mb-8">Government Connect</h1>
+                <div class="glass p-12 rounded-3xl text-center">
+                    <i class="fa-solid fa-building text-8xl 
