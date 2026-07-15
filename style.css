@@ -51,3 +51,36 @@ padding:20px;
 background:#111827;
 text-align:center;
 }
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+padding:40px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:#161b22;
+padding:25px;
+border-radius:16px;
+border:1px solid #2b3240;
+transition:.3s;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:#3b82f6;
+}
+
+.card h2{
+margin-top:0;
+color:#38bdf8;
+}
+
+.card p{
+color:#cbd5e1;
+line-height:1.7;
+}
