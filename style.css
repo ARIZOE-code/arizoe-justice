@@ -293,5 +293,78 @@
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     .btn{transition:none;}
-     }
-     
+  }
+
+  /* ---------- Public Problem Portal (complaint form) ---------- */
+  .form-group{margin-bottom:20px;}
+  .form-label{
+    display:block;font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;color:var(--olive);
+    text-transform:uppercase;letter-spacing:0.04em;
+    margin-bottom:8px;
+  }
+  .req{color:var(--stamp);}
+  .form-input{
+    width:100%;
+    font-family:'Noto Sans Devanagari',sans-serif;
+    font-size:0.92rem;
+    padding:12px 14px;
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    border-radius:6px;
+    color:var(--charcoal);
+    outline:none;
+  }
+  .form-input:focus{border-color:var(--stamp);}
+  textarea.form-input{resize:vertical;}
+
+  .upload-box{
+    border:2px dashed var(--gold);
+    border-radius:8px;
+    padding:22px;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    text-align:center;
+    font-size:0.85rem;color:var(--olive-light);
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .upload-box:hover{background:var(--paper-dark);}
+  .upload-icon{font-size:1.4rem;}
+  .file-chip{
+    margin-top:8px;font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;color:var(--stamp);
+  }
+
+  .success-box{
+    margin-top:22px;
+    border:2px solid var(--olive);
+    border-radius:8px;
+    padding:20px;
+    text-align:center;
+    position:relative;
+  }
+  .success-box h4{margin-bottom:8px;}
+  .success-box p{font-size:0.85rem;color:var(--olive-light);}
+  .stamp-mini-static{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    border:2px solid var(--stamp);color:var(--stamp);
+    padding:4px 12px;border-radius:20px;
+    margin-bottom:10px;
+    transform:rotate(-4deg);
+  }
+
+  .step-list{display:flex;flex-direction:column;gap:12px;}
+  .step-item{
+    display:flex;align-items:center;gap:12px;
+    font-size:0.88rem;color:var(--charcoal);
+  }
+  .step-num{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--olive);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:0.75rem;
+    flex-shrink:0;
+          }
+                          
