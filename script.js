@@ -50,7 +50,9 @@ if(complaintForm){
 // ---------- Campaign Center (campaigns.html) ----------
 document.querySelectorAll('.filter-chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
-    document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+    const group = chip.closest('.filter-row');
+    if(!group) return;
+    group.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
     chip.classList.add('active');
     const filter = chip.getAttribute('data-filter');
     document.querySelectorAll('.campaign-card, .pil-card').forEach(card=>{
@@ -82,3 +84,43 @@ if(draftBtn){
     draftBtn.style.opacity = '0.7';
   });
 }
+
+// ---------- Login / Signup (login.html) ----------
+document.querySelectorAll('.auth-switch button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.auth-switch button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const target = btn.getAttribute('data-form');
+    document.querySelectorAll('.auth-form').forEach(f=>{
+      f.classList.toggle('active', f.id === target);
+    });
+  });
+});
+
+const loginForm = document.getElementById('loginForm');
+if(loginForm){
+  loginForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    alert('लॉगिन फ़ॉर्म तैयार है। असली लॉगिन बैकएंड जुड़ने के बाद सक्रिय होगा।');
+  });
+}
+const signupForm = document.getElementById('signupForm');
+if(signupForm){
+  signupForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    alert('साइनअप फ़ॉर्म तैयार है। असली खाता बैकएंड जुड़ने के बाद बनेगा।');
+  });
+}
+
+// ---------- Solution Library (library.html) ----------
+document.querySelectorAll('.cat-chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    const cat = chip.getAttribute('data-cat');
+    document.querySelectorAll('.resource-card').forEach(card=>{
+      const cardCat = card.getAttribute('data-cat');
+      card.style.display = (cat === 'all' || cat === cardCat) ? '' : 'none';
+    });
+  });
+});
