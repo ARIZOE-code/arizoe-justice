@@ -1,68 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ARIZOE JUSTICE - Campaigns">
-    <title>Campaigns • ARIZOE JUSTICE</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>अभियान केंद्र — ARIZOE UNFILTERED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;700;900&family=Noto+Sans+Devanagari:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen">
-    <!-- TOP BAR -->
-    <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-x-4">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-3xl">⚖️</div>
-                <div>
-                    <span class="font-bold tracking-tighter text-3xl">ARIZOE</span>
-                    <span class="font-bold tracking-tighter text-blue-400 text-3xl">JUSTICE</span>
-                </div>
-            </div>
-            <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">← Dashboard</a>
-        </div>
-    </header>
+<body>
 
-    <div class="max-w-6xl mx-auto px-6 py-12">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-                <h1 class="text-4xl font-bold tracking-tighter">Active Campaigns</h1>
-                <p class="text-zinc-400">Join movements that matter</p>
-            </div>
-            <a href="#" class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-3xl">Create New Campaign</a>
-        </div>
+<div class="filestrip">
+  <span>ARIZOE / CASE-FILE / भारत</span>
+  <span class="mono" id="liveClock">स्थिति: सक्रिय</span>
+</div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Campaign Card 1 -->
-            <div class="glass rounded-3xl overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-teal-600 to-cyan-600"></div>
-                <div class="p-8">
-                    <div class="flex justify-between text-sm mb-4">
-                        <span class="text-teal-400">Environment</span>
-                        <span>68% Funded</span>
-                    </div>
-                    <h3 class="font-semibold text-xl mb-2">Save the Ganga</h3>
-                    <p class="text-zinc-400 text-sm line-clamp-3">Mass movement against industrial pollution in the Ganges river basin.</p>
-                    <button class="mt-8 w-full py-4 bg-white text-zinc-900 rounded-3xl font-semibold">Support Campaign</button>
-                </div>
-            </div>
-
-            <!-- Campaign Card 2 -->
-            <div class="glass rounded-3xl overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-rose-600 to-pink-600"></div>
-                <div class="p-8">
-                    <div class="flex justify-between text-sm mb-4">
-                        <span class="text-rose-400">Safety</span>
-                        <span>91% Funded</span>
-                    </div>
-                    <h3 class="font-semibold text-xl mb-2">Safe Streets for Women</h3>
-                    <p class="text-zinc-400 text-sm line-clamp-3">Demanding better lighting and rapid response in urban areas.</p>
-                    <button class="mt-8 w-full py-4 bg-white text-zinc-900 rounded-3xl font-semibold">Support Campaign</button>
-                </div>
-            </div>
+<header>
+  <div class="navbar">
+    <div class="brand">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;">
+        <div class="seal">अ</div>
+        <div class="brand-text">
+          <h1>ARIZOE UNFILTERED</h1>
+          <span>Digital Justice Ecosystem</span>
         </div>
+      </a>
+    </div>
+  </div>
+  <nav class="tabs">
+    <a href="index.html#home" data-tab>होम</a>
+    <a href="index.html#about" data-tab>परिचय</a>
+    <a href="index.html#hub" data-tab>यूट्यूब हब</a>
+    <a href="complaint.html" data-tab>समस्या दर्ज करें</a>
+    <a href="campaigns.html" class="active" data-tab>अभियान</a>
+    <a href="pil.html" data-tab>PIL केंद्र</a>
+    <a href="#" data-tab data-soon>पारदर्शिता</a>
+  </nav>
+</header>
+
+<section class="hero" style="padding-bottom:24px;">
+  <span class="file-tag mono">FILE NO. ARIZOE/2026/CC-07 — मॉड्यूल-07</span>
+  <h2>अभियान केंद्र</h2>
+  <p class="hero-quote">ज्ञापन, RTI, ईमेल अभियान और जनसमर्थन के ज़रिए — हर अभियान की स्थिति यहाँ ट्रैक होती है, शुरुआत से समाधान तक।</p>
+</section>
+
+<section class="module" style="padding-top:12px;">
+  <div class="module-head">
+    <span class="module-num">फ़िल्टर</span>
+    <div class="filter-row" id="filterRow">
+      <button class="filter-chip active" data-filter="all">सभी</button>
+      <button class="filter-chip" data-filter="ज्ञापन">ज्ञापन</button>
+      <button class="filter-chip" data-filter="RTI">RTI</button>
+      <button class="filter-chip" data-filter="ईमेल अभियान">ईमेल अभियान</button>
+    </div>
+  </div>
+
+  <div class="campaign-list" id="campaignList">
+
+    <div class="campaign-card" data-type="ज्ञापन">
+      <div class="campaign-top">
+        <span class="pill">ज्ञापन</span>
+        <span class="campaign-id mono">CC/07/A1</span>
+      </div>
+      <h4>शिक्षा में पारदर्शिता — परीक्षा सुधार ज्ञापन</h4>
+      <p>परीक्षा प्रणाली में जवाबदेही और पेपर-लीक रोकथाम हेतु शिक्षा मंत्रालय को ज्ञापन।</p>
+
+      <div class="status-track">
+        <div class="status-step done">शुरू हुआ</div>
+        <div class="status-step done">समीक्षा में</div>
+        <div class="status-step active">विभाग को भेजा गया</div>
+        <div class="status-step">समाधान</div>
+      </div>
+
+      <div class="campaign-foot">
+        <span class="support-count mono"><span class="count-num">742</span> जनसमर्थन</span>
+        <button class="btn btn-primary support-btn">जनसमर्थन दो</button>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="campaign-card" data-type="RTI">
+      <div class="campaign-top">
+        <span class="pill">RTI</span>
+        <span class="campaign-id mono">CC/07/A2</span>
+      </div>
+      <h4>RTI जागरूकता अभियान</h4>
+      <p>नागरिकों को RTI दाखिल करने की प्रक्रिया सिखाने और सामूहिक RTI दाखिल करने की पहल।</p>
+
+      <div class="status-track">
+        <div class="status-step done">शुरू हुआ</div>
+        <div class="status-step active">समीक्षा में</div>
+        <div class="status-step">विभाग को भेजा गया</div>
+        <div class="status-step">समाधान</div>
+      </div>
+
+      <div class="campaign-foot">
+        <span class="support-count mono"><span class="count-num">389</span> जनसमर्थन</span>
+        <button class="btn btn-primary support-btn">जनसमर्थन दो</button>
+      </div>
+    </div>
+
+    <div class="campaign-card" data-type="ईमेल अभियान">
+      <div class="campaign-top">
+        <span class="pill">ईमेल अभियान</span>
+        <span class="campaign-id mono">CC/07/A3</span>
+      </div>
+      <h4>पुलिस सुधार संवाद</h4>
+      <p>स्थानीय प्रशासन को सीधे ईमेल भेजकर पुलिस भर्ती प्रक्रिया में सुधार की मांग।</p>
+
+      <div class="status-track">
+        <div class="status-step active">शुरू हुआ</div>
+        <div class="status-step">समीक्षा में</div>
+        <div class="status-step">विभाग को भेजा गया</div>
+        <div class="status-step">समाधान</div>
+      </div>
+
+      <div class="campaign-foot">
+        <span class="support-count mono"><span class="count-num">156</span> जनसमर्थन</span>
+        <button class="btn btn-primary support-btn">जनसमर्थन दो</button>
+      </div>
+    </div>
+
+    <div class="campaign-card" data-type="ज्ञापन">
+      <div class="campaign-top">
+        <span class="pill">ज्ञापन</span>
+        <span class="campaign-id mono">CC/07/A4</span>
+      </div>
+      <h4>नगर निगम जवाबदेही ज्ञापन</h4>
+      <p>स्थानीय नगर निगम सेवाओं में देरी और पारदर्शिता की कमी को लेकर सामूहिक ज्ञापन।</p>
+
+      <div class="status-track">
+        <div class="status-step done">शुरू हुआ</div>
+        <div class="status-step done">समीक्षा में</div>
+        <div class="status-step done">विभाग को भेजा गया</div>
+        <div class="status-step active">समाधान</div>
+      </div>
+
+      <div class="campaign-foot">
+        <span class="support-count mono"><span class="count-num">1204</span> जनसमर्थन</span>
+        <button class="btn btn-primary support-btn">जनसमर्थन दो</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 ARIZOE UNFILTERED — स्वतंत्र शोध मंच</span>
+  <span>निर्माणाधीन · अगला मॉड्यूल: PIL केंद्र</span>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
