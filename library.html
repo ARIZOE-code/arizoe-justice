@@ -1,73 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ARIZOE JUSTICE - Law Library">
-    <title>Law Library • ARIZOE JUSTICE</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>समाधान लाइब्रेरी — ARIZOE UNFILTERED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;700;900&family=Noto+Sans+Devanagari:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen">
-    <!-- TOP BAR -->
-    <header class="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-x-4">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-3xl">⚖️</div>
-                <div>
-                    <span class="font-bold tracking-tighter text-3xl">ARIZOE</span>
-                    <span class="font-bold tracking-tighter text-blue-400 text-3xl">JUSTICE</span>
-                </div>
-            </div>
-            <a href="dashboard.html" class="text-blue-400 hover:text-blue-300">← Dashboard</a>
+<body>
+
+<div class="filestrip">
+  <span>ARIZOE / CASE-FILE / भारत</span>
+  <span class="mono" id="liveClock">स्थिति: सक्रिय</span>
+</div>
+
+<header>
+  <div class="navbar">
+    <div class="brand">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;">
+        <div class="seal">अ</div>
+        <div class="brand-text">
+          <h1>ARIZOE UNFILTERED</h1>
+          <span>Digital Justice Ecosystem</span>
         </div>
-    </header>
+      </a>
+    </div>
+    <a href="login.html" class="btn btn-ghost" style="padding:9px 18px;font-size:0.78rem;display:inline-block;">लॉगिन</a>
+  </div>
+  <nav class="tabs">
+    <a href="index.html#home" data-tab>होम</a>
+    <a href="index.html#about" data-tab>परिचय</a>
+    <a href="library.html" class="active" data-tab>समाधान लाइब्रेरी</a>
+    <a href="complaint.html" data-tab>समस्या दर्ज करें</a>
+    <a href="campaigns.html" data-tab>अभियान</a>
+    <a href="pil.html" data-tab>PIL केंद्र</a>
+    <a href="dashboard.html" data-tab>पारदर्शिता</a>
+  </nav>
+</header>
 
-    <div class="max-w-6xl mx-auto px-6 py-12">
-        <h1 class="text-4xl font-bold tracking-tighter mb-2">Digital Law Library</h1>
-        <p class="text-zinc-400 mb-10">Complete legal knowledge at your fingertips</p>
+<section class="hero" style="padding-bottom:24px;">
+  <span class="file-tag mono">FILE NO. ARIZOE/2026/SL-04 — मॉड्यूल-04</span>
+  <h2>समाधान लाइब्रेरी</h2>
+  <p class="hero-quote">शिक्षा से लेकर संविधान तक — हर मुद्दे पर शोध-आधारित समाधान, वर्गीकृत और डाउनलोड करने योग्य।</p>
+</section>
 
-        <!-- Search -->
-        <div class="mb-12">
-            <input type="text" id="law-search" 
-                   class="w-full bg-zinc-900 border border-zinc-700 focus:border-blue-500 rounded-3xl py-6 px-8 text-lg outline-none" 
-                   placeholder="Search Constitution, BNS, RTI, Judgments...">
-        </div>
+<section class="module" style="padding-top:12px;border-bottom:none;">
+  <div class="category-grid" id="categoryGrid">
+    <div class="cat-chip active" data-cat="all"><span class="icon">📚</span><span class="name">सभी</span></div>
+    <div class="cat-chip" data-cat="education"><span class="icon">🎓</span><span class="name">शिक्षा</span></div>
+    <div class="cat-chip" data-cat="law"><span class="icon">⚖️</span><span class="name">कानून</span></div>
+    <div class="cat-chip" data-cat="judiciary"><span class="icon">🏛️</span><span class="name">न्यायपालिका</span></div>
+    <div class="cat-chip" data-cat="constitution"><span class="icon">📜</span><span class="name">संविधान</span></div>
+    <div class="cat-chip" data-cat="corruption"><span class="icon">🔍</span><span class="name">भ्रष्टाचार</span></div>
+    <div class="cat-chip" data-cat="police"><span class="icon">👮</span><span class="name">पुलिस</span></div>
+    <div class="cat-chip" data-cat="governance"><span class="icon">🏢</span><span class="name">शासन</span></div>
+    <div class="cat-chip" data-cat="exams"><span class="icon">📝</span><span class="name">परीक्षाएं</span></div>
+    <div class="cat-chip" data-cat="economy"><span class="icon">💰</span><span class="name">अर्थव्यवस्था</span></div>
+    <div class="cat-chip" data-cat="social"><span class="icon">🤝</span><span class="name">सामाजिक मुद्दे</span></div>
+  </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Law Card -->
-            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
-                <div class="text-4xl mb-6">📜</div>
-                <h3 class="font-semibold text-xl">Constitution of India</h3>
-                <p class="text-zinc-400 text-sm mt-2">Fundamental Rights, DPSP, Amendments</p>
-            </div>
+  <div class="resource-list">
 
-            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
-                <div class="text-4xl mb-6">⚖️</div>
-                <h3 class="font-semibold text-xl">Bharatiya Nyaya Sanhita (BNS)</h3>
-                <p class="text-zinc-400 text-sm mt-2">New Criminal Laws replacing IPC</p>
-            </div>
-
-            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
-                <div class="text-4xl mb-6">📋</div>
-                <h3 class="font-semibold text-xl">Right to Information (RTI)</h3>
-                <p class="text-zinc-400 text-sm mt-2">Filing process and timelines</p>
-            </div>
-
-            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
-                <div class="text-4xl mb-6">👩</div>
-                <h3 class="font-semibold text-xl">Women & Child Rights</h3>
-                <p class="text-zinc-400 text-sm mt-2">POCSO, Domestic Violence Act</p>
-            </div>
-
-            <div class="glass rounded-3xl p-8 hover:bg-white/5 transition-colors cursor-pointer">
-                <div class="text-4xl mb-6">💻</div>
-                <h3 class="font-semibold text-xl">Cyber Laws & IT Act</h3>
-                <p class="text-zinc-400 text-sm mt-2">Data protection and online frauds</p>
-            </div>
-        </div>
+    <div class="resource-card" data-cat="education">
+      <div>
+        <h4>परीक्षा प्रणाली सुधार — नीति सुझाव पत्र</h4>
+        <p>पेपर-लीक रोकथाम और परीक्षा पारदर्शिता पर शोध आधारित सुझाव।</p>
+        <div class="resource-meta">शिक्षा · PDF · 18 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
     </div>
 
-    <script src="script.js"></script>
+    <div class="resource-card" data-cat="law">
+      <div>
+        <h4>RTI कैसे दाखिल करें — पूरी गाइड</h4>
+        <p>सूचना का अधिकार अधिनियम के तहत आवेदन करने की चरणबद्ध प्रक्रिया।</p>
+        <div class="resource-meta">कानून · PDF · 8 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="judiciary">
+      <div>
+        <h4>निचली अदालतों में केस-देरी का विश्लेषण</h4>
+        <p>पेंडिंग केसों की संख्या और देरी के मुख्य कारणों पर डेटा-आधारित रिपोर्ट।</p>
+        <div class="resource-meta">न्यायपालिका · PDF · 24 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="constitution">
+      <div>
+        <h4>मौलिक अधिकार — सरल भाषा में समझें</h4>
+        <p>संविधान के भाग III में दिए गए मौलिक अधिकारों की आसान व्याख्या।</p>
+        <div class="resource-meta">संविधान · PDF · 12 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="corruption">
+      <div>
+        <h4>भ्रष्टाचार की शिकायत कहाँ करें</h4>
+        <p>लोकपाल, विजिलेंस विभाग और अन्य संस्थाओं की संपर्क जानकारी और प्रक्रिया।</p>
+        <div class="resource-meta">भ्रष्टाचार · PDF · 6 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="police">
+      <div>
+        <h4>पुलिस भर्ती प्रक्रिया — तथ्य जांच रिपोर्ट</h4>
+        <p>हाल की भर्ती परीक्षाओं में अनियमितताओं पर आधारित विश्लेषण।</p>
+        <div class="resource-meta">पुलिस · PDF · 15 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="governance">
+      <div>
+        <h4>नगर निगम सेवाओं की जवाबदेही ढांचा</h4>
+        <p>स्थानीय प्रशासन को जवाबदेह बनाने के लिए नागरिक-अनुकूल सुझाव।</p>
+        <div class="resource-meta">शासन · PDF · 10 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="exams">
+      <div>
+        <h4>NEET पेपर लीक — पूरी समयरेखा</h4>
+        <p>घटनाक्रम, जांच की स्थिति और अब तक हुई कार्यवाही का दस्तावेज़।</p>
+        <div class="resource-meta">परीक्षाएं · PDF · 20 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="economy">
+      <div>
+        <h4>सरकारी योजनाओं का बजट विश्लेषण</h4>
+        <p>प्रमुख कल्याणकारी योजनाओं में बजट आवंटन बनाम वास्तविक खर्च का अध्ययन।</p>
+        <div class="resource-meta">अर्थव्यवस्था · PDF · 22 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+    <div class="resource-card" data-cat="social">
+      <div>
+        <h4>आरक्षण नीति — तथ्य और आंकड़े</h4>
+        <p>आरक्षण नीति के इतिहास, वर्तमान स्थिति और आंकड़ों पर आधारित शोध पत्र।</p>
+        <div class="resource-meta">सामाजिक मुद्दे · PDF · 16 पेज</div>
+      </div>
+      <a href="#">डाउनलोड करें</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 ARIZOE UNFILTERED — स्वतंत्र शोध मंच</span>
+  <span>निर्माणाधीन · अगला मॉड्यूल: यूज़र डैशबोर्ड</span>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
