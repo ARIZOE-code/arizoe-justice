@@ -18,3 +18,30 @@ document.querySelectorAll('[data-tab]').forEach(tab=>{
   }
   updateClock();
   setInterval(updateClock, 30000);
+
+  // ---------- Public Problem Portal (complaint.html) ----------
+  document.querySelectorAll('.upload-box').forEach(box=>{
+    const targetId = box.getAttribute('data-target');
+    const input = document.getElementById(targetId);
+    if(!input) return;
+    box.addEventListener('click', ()=> input.click());
+    input.addEventListener('change', ()=>{
+      const chip = document.getElementById('chip_' + targetId.split('_')[1]);
+      if(input.files.length && chip){
+        chip.textContent = '✓ ' + input.files[0].name;
+      }
+    });
+  });
+
+  const complaintForm = document.getElementById('complaintForm');
+  if(complaintForm){
+    complaintForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const caseId = 'ARIZOE/PP/' + Math.floor(1000 + Math.random()*9000);
+      document.getElementById('successCaseId').textContent = 'केस दर्ज हो गया — ' + caseId;
+      document.getElementById('successBox').style.display = 'block';
+      document.getElementById('successBox').scrollIntoView({behavior:'smooth', block:'center'});
+      complaintForm.reset();
+      document.querySelectorAll('.file-chip').forEach(c=>c.textContent='');
+    });
+  }
