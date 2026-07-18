@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIL केंद्र — ARIZOE UNFILTERED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;700;900&family=Noto+Sans+Devanagari:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="filestrip">
+  <span>ARIZOE / CASE-FILE / भारत</span>
+  <span class="mono" id="liveClock">स्थिति: सक्रिय</span>
+</div>
+
+<header>
+  <div class="navbar">
+    <div class="brand">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;">
+        <div class="seal">अ</div>
+        <div class="brand-text">
+          <h1>ARIZOE UNFILTERED</h1>
+          <span>Digital Justice Ecosystem</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <nav class="tabs">
+    <a href="index.html#home" data-tab>होम</a>
+    <a href="index.html#about" data-tab>परिचय</a>
+    <a href="index.html#hub" data-tab>यूट्यूब हब</a>
+    <a href="complaint.html" data-tab>समस्या दर्ज करें</a>
+    <a href="campaigns.html" data-tab>अभियान</a>
+    <a href="pil.html" class="active" data-tab>PIL केंद्र</a>
+    <a href="#" data-tab data-soon>पारदर्शिता</a>
+  </nav>
+</header>
+
+<section class="hero" style="padding-bottom:24px;">
+  <span class="file-tag mono">FILE NO. ARIZOE/2026/PIL-08 — मॉड्यूल-08</span>
+  <h2>PIL केंद्र</h2>
+  <p class="hero-quote">जनहित याचिका (Public Interest Litigation) का ड्राफ्ट, उसकी स्थिति, सुनवाई की तारीखें और न्यायालय के आदेश — सब एक जगह।</p>
+</section>
+
+<section class="module" style="padding-top:12px;">
+
+  <div class="draft-banner">
+    <div>
+      <h4>PIL ड्राफ्ट चाहिए?</h4>
+      <p>अगर तुम्हारे पास कोई मुद्दा है जो जनहित याचिका के लायक है, तो हमारी टीम से ड्राफ्टिंग सहायता के लिए अनुरोध करो।</p>
+    </div>
+    <button class="btn btn-primary" id="draftRequestBtn">PIL ड्राफ्ट का अनुरोध करें</button>
+  </div>
+
+  <div class="module-head">
+    <span class="module-num">फ़िल्टर</span>
+    <div class="filter-row" id="filterRow">
+      <button class="filter-chip active" data-filter="all">सभी</button>
+      <button class="filter-chip" data-filter="pending">विचाराधीन</button>
+      <button class="filter-chip" data-filter="hearing">सुनवाई जारी</button>
+      <button class="filter-chip" data-filter="disposed">निपटाई गई</button>
+    </div>
+  </div>
+
+  <div class="pil-list">
+
+    <div class="pil-card" data-type="hearing">
+      <div class="pil-top">
+        <div>
+          <div class="pil-court">इलाहाबाद उच्च न्यायालय</div>
+          <h4>परीक्षा पेपर-लीक रोकथाम हेतु जनहित याचिका</h4>
+        </div>
+        <span class="pil-status hearing">सुनवाई जारी</span>
+      </div>
+      <p>राज्य स्तरीय परीक्षाओं में पेपर-लीक रोकने के लिए ठोस तकनीकी और प्रशासनिक तंत्र बनाने की मांग।</p>
+      <div class="pil-meta-row">
+        <div><span class="lbl">केस नंबर</span>WPIL/2026/0142</div>
+        <div><span class="lbl">दाखिल तारीख</span>12 मार्च 2026</div>
+        <div><span class="lbl">अगली सुनवाई</span>4 अगस्त 2026</div>
+      </div>
+      <div class="pil-links">
+        <a href="#">याचिका देखें</a>
+        <a href="#">सुनवाई अपडेट</a>
+        <a href="#" class="order">आदेश PDF</a>
+      </div>
+    </div>
+
+    <div class="pil-card" data-type="pending">
+      <div class="pil-top">
+        <div>
+          <div class="pil-court">दिल्ली उच्च न्यायालय</div>
+          <h4>पुलिस भर्ती प्रक्रिया में पारदर्शिता याचिका</h4>
+        </div>
+        <span class="pil-status pending">विचाराधीन</span>
+      </div>
+      <p>भर्ती परीक्षा परिणामों के सार्वजनिक प्रकाशन और स्वतंत्र ऑडिट की मांग को लेकर याचिका दाखिल की गई।</p>
+      <div class="pil-meta-row">
+        <div><span class="lbl">केस नंबर</span>WPIL/2026/0198</div>
+        <div><span class="lbl">दाखिल तारीख</span>2 जून 2026</div>
+        <div><span class="lbl">अगली सुनवाई</span>तारीख तय होना बाकी</div>
+      </div>
+      <div class="pil-links">
+        <a href="#">याचिका देखें</a>
+        <a href="#">स्थिति ट्रैक करें</a>
+      </div>
+    </div>
+
+    <div class="pil-card" data-type="disposed">
+      <div class="pil-top">
+        <div>
+          <div class="pil-court">सर्वोच्च न्यायालय</div>
+          <h4>नगर निगम सेवा-देरी संबंधी याचिका</h4>
+        </div>
+        <span class="pil-status disposed">निपटाई गई</span>
+      </div>
+      <p>नगर निगम सेवाओं में देरी को लेकर दाखिल याचिका पर न्यायालय ने समयबद्ध समाधान का आदेश दिया।</p>
+      <div class="pil-meta-row">
+        <div><span class="lbl">केस नंबर</span>WPIL/2025/0087</div>
+        <div><span class="lbl">दाखिल तारीख</span>19 नवंबर 2025</div>
+        <div><span class="lbl">निर्णय तारीख</span>28 जनवरी 2026</div>
+      </div>
+      <div class="pil-links">
+        <a href="#">याचिका देखें</a>
+        <a href="#" class="order">अंतिम आदेश PDF</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 ARIZOE UNFILTERED — स्वतंत्र शोध मंच</span>
+  <span>निर्माणाधीन · अगला मॉड्यूल: पारदर्शिता डैशबोर्ड</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
